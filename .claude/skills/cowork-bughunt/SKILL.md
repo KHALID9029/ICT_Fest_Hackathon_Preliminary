@@ -30,7 +30,6 @@ if it "fixes" the behavior. Stop and find the real bug.
 
 ## Before You Touch Code (setup)
 
-- Fork the repo and **Leave fork network** (Settings -> Danger Zone) BEFORE editing.
 - `docker compose up --build` (or `uvicorn app.main:app --reload`) — confirm it boots.
 - Keep the app running and a scratch `curl`/httpx script open. You test against `:8000`.
 - Work only in your assigned module (see `MODULE_DIVISION.md`) to avoid collisions.
@@ -124,14 +123,15 @@ name the file and line.
 
 ## Quick Reference
 
-| Phase | Do | Done when |
-|---|---|---|
-| 1 Locate | Probe API per rule, diff actual vs required | You can state the rule + the observable deviation |
-| 2 Trace | Follow data flow to first wrong value | You know the file/line and why |
-| 3 Hypothesis | One minimal change | Probe passes, or new hypothesis |
-| 4 Prove | Re-probe incl. boundaries + concurrency; regression; log | Rule holds, contract intact, report updated |
+| Phase        | Do                                                       | Done when                                         |
+| ------------ | -------------------------------------------------------- | ------------------------------------------------- |
+| 1 Locate     | Probe API per rule, diff actual vs required              | You can state the rule + the observable deviation |
+| 2 Trace      | Follow data flow to first wrong value                    | You know the file/line and why                    |
+| 3 Hypothesis | One minimal change                                       | Probe passes, or new hypothesis                   |
+| 4 Prove      | Re-probe incl. boundaries + concurrency; regression; log | Rule holds, contract intact, report updated       |
 
 ## Submission checklist
+
 - [ ] Fork left the network before editing
 - [ ] Only broken code changed; no refactors; contract identical
 - [ ] `pytest` still green
