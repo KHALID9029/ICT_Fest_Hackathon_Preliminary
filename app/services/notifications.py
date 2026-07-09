@@ -29,7 +29,11 @@ def notify_created(booking) -> None:
 
 
 def notify_cancelled(booking) -> None:
+    # Never hold _audit_lock while waiting for _email_lock: notify_created
+    # nests the locks in the opposite (email -> audit) order, and holding one
+    # while acquiring the other deadlocks the service under concurrent
+    # create + cancel traffic.
     with _audit_lock:
         _write_audit("cancelled", booking)
-        with _email_lock:
-            _send_email("cancelled", booking)
+    with _email_lock:
+        _send_email("cancelled", booking)
