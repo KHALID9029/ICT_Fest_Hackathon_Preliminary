@@ -30,7 +30,6 @@ if it "fixes" the behavior. Stop and find the real bug.
 
 ## Before You Touch Code (setup)
 
-- Fork the repo and **Leave fork network** (Settings -> Danger Zone) BEFORE editing.
 - `docker compose up --build` (or `uvicorn app.main:app --reload`) — confirm it boots.
 - Keep the app running and a scratch `curl`/httpx script open. You test against `:8000`.
 - Work only in your assigned module (see `MODULE_DIVISION.md`) to avoid collisions.

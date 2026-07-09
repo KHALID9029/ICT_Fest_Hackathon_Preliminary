@@ -54,6 +54,9 @@ def create_room(
     db.add(room)
     db.commit()
     db.refresh(room)
+    # A new room must show up in usage reports immediately, including with
+    # zero bookings (Rule 12).
+    cache.invalidate_report(admin.org_id)
     return _serialize_room(room)
 
 
